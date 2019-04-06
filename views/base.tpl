@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{title or 'coolt.party 😎'}}</title>
+  <title>{{get('title', 'coolt.party 😎')}}</title>
   <meta charset="utf-8">
   <link rel="stylesheet" type="text/css" href="static/style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
