@@ -34,13 +34,20 @@ def get_index():
 
     
 
-@get("/recipes/<recipe_id>")
+@get("/recipes/<recipe_id:int>")
 def get_recipe(recipe_id):
     recipe = data.get_recipe(recipe_id)
     if recipe is None:
         return abort(404, "Recipe not found")
     return template("recipe.tpl", recipe)
 
+
+@post("/recipes/<recipe_id:int>")
+def review_recipe(recipe_id):
+    errors = validate_form(request.forms, ["review", "author"])
+    if not errors and data.get_recipe(recipe_id):
+        data.add_review(recipe_id, request.forms.review, request.forms.author)
+    redirect("/recipes/{}".format(recipe_id))
 
 
 @get("/create/recipe")

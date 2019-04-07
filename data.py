@@ -24,8 +24,7 @@ def connect():
 def populate_recipe(recipe):
     ingredients = db_ingredients.find(recipe=recipe['id'])
     recipe['ingredients'] = [row['ingredient'] for row in ingredients]
-    reviews = db_reviews.find(recipe=recipe['id'])
-    recipe['reviews'] = [row['review'] for row in reviews]
+    recipe['reviews'] = db_reviews.find(recipe=recipe['id']) 
 
 def get_recipes():
     ret = []
@@ -55,3 +54,6 @@ def add_recipe(name, description, ingredients, reviews=[]):
         db.rollback()
         traceback.print_exc()
 
+def add_review(recipe_id, review, author):
+    review_id = db_reviews.insert(dict(recipe=recipe_id, review=review, author=author))
+    return review_id
