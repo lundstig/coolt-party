@@ -69,6 +69,6 @@ def create_recipe():
     redirect("/recipes/{}".format(recipe_id))
     
 
-
+debug(True)
 data.connect()
 run(host="localhost", port=8080, reloader=True)
