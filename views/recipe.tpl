@@ -17,12 +17,13 @@
     <div id="reviews">
       % for review in reviews:
         <blockquote>
-          <p><q>{{review['review']}}</q></p>hgkjfdshglhgkdskjhf
-          <footer>{{get('review["author"]', 'N.N')}}</footer>
+          <p><q>{{review['review']}}</q></p>
+          <footer>{{get(review["author"], 'Okänd')}}</footer>
           </blockquote>
       % end
       <br><br>
       <form method="post">
+        <input>
         <textarea name="review" placeholder="Skriv en recension"></textarea><br>
         <input type="text" name="author" placeholder="Namn"></textarea>
         <br>
