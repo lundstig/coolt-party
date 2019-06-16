@@ -28,12 +28,15 @@ def populate_recipe(recipe):
     ingredients = db_ingredients.find(recipe=recipe["id"])
     recipe["ingredients"] = [row["ingredient"] for row in ingredients]
     recipe["reviews"] = db_reviews.find(recipe=recipe["id"])
+    recipe["link"] = "/recipes/{}".format(recipe["id"])
 
 
 def get_recipes():
     ret = []
     for recipe in db_recipes:
         populate_recipe(recipe)
+        ret.append(recipe)
+    ret.sort(key=lambda recipe: recipe["name"])
     return ret
 
 

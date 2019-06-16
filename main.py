@@ -28,6 +28,10 @@ def hello(filepath):
 def get_index():
     return static_file("index.html", root=SITE_PATH)
 
+@get("/recipes")
+def get_recipes():
+    recipes = data.get_recipes()
+    return template("recipes.tpl", {"recipes": recipes})
 
 @get("/recipes/<recipe_id:int>")
 def get_recipe(recipe_id):

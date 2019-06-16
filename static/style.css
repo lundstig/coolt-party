@@ -95,6 +95,16 @@ p, li, a {
   max-width: 50%;
 }
 
+.recipe-link {
+  display: inline-block;
+  font-size: 2em;
+  margin: 10px;
+}
+
+.recipe-link:hover {
+  font-weight: 1000;
+}
+
 blockquote {
   font-family:
   margin: 0 auto;
@@ -148,51 +158,5 @@ blockquote:nth-of-type(even) footer:after {
   }
   blockquote:nth-of-type(even) {
     padding: 1em 1em 1em 20%;
-  }
-}
-
-@media (max-width: 730px) {
-  h1 {
-    font-size: 48px;
-    text-align: center;
-  }
-
-  h3 {
-    text-align: center;
-  }
-
-  p {
-    text-align: center;
-  }
-
-  #contact {
-    position: static;
-    width: 100%;
-    text-align: center;
-  }
-
-  #corner-top {
-    left: 0;
-    top: 0;
-    height: 50px;
-    width: 100%;
-    transform-origin: bottom left;
-    transform: rotate(-15deg);
-  }
-
-  #projects {
-    justify-content: center;
-  }
-
-  .box  {
-    min-width: 130px;
-  }
-
-  #contact-text {
-    display: none;
-  }
-
-  #contact-text-mobile {
-    display: block;
   }
 }
