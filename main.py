@@ -1,38 +1,33 @@
 from bottle import *
+
 import data
 
-site_path = "static/"
+# pylint: disable=no-member
 
-test_drink = dict(
-    name="Testdrink",
-    description="En lyxig drink...",
-    ingredients=["1 cl vatten", "2 cl citronjuice"],
-    reviews=["Mkt bra, 5/7", "Helt ok, 10/10"]
-)
+SITE_PATH = "static/"
 
 
 def validate_form(form, required):
     errors = []
     for field in required:
         value = form.get(field)
-        if value is "" or value is None:
+        if not value:
             errors.append("Missing field {}".format(field))
 
     if errors:
         return ". ".join(errors)
-     
+    return None
+
 
 @get("/static/<filepath:path>")
 def hello(filepath):
-    return static_file(filepath, root=site_path)
+    return static_file(filepath, root=SITE_PATH)
 
 
 @get("/")
 def get_index():
-    return static_file("index.html", root=site_path)
+    return static_file("index.html", root=SITE_PATH)
 
-
-    
 
 @get("/recipes/<recipe_id:int>")
 def get_recipe(recipe_id):
@@ -57,7 +52,7 @@ def get_create_recipe():
 
 @post("/create/recipe")
 def create_recipe():
-    errors = validate_form(request.forms, ['name', 'description', 'ingredients'])
+    errors = validate_form(request.forms, ["name", "description", "ingredients"])
     if errors:
         return template("create_recipe.tpl", errors=errors)
 
@@ -66,8 +61,8 @@ def create_recipe():
     ingredients = request.forms.ingredients.splitlines()
 
     recipe_id = data.add_recipe(name, description, ingredients)
-    redirect("/recipes/{}".format(recipe_id))
-    
+    return redirect("/recipes/{}".format(recipe_id))
+
 
 debug(True)
 data.connect()
