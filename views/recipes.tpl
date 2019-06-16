@@ -7,4 +7,6 @@
   % for recipe in recipes:
       <a href="{{recipe["link"]}}" class="recipe-link">{{recipe["name"]}}</a><br>
   % end
+  <br>
+  <a href="/create/recipe">+ Skapa nytt recept +</a>
 </div>
