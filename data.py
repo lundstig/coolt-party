@@ -3,7 +3,6 @@ import traceback
 
 DB_URL = "albert.lundstig.com:5432"
 DB_USER = "cooltparty"
-DB_PASSWORD = "5YCDON0nPLDUXynSoLYOv5TttYsNDGiN"
 DB_NAME = "cooltparty"
 
 db = None
@@ -12,13 +11,15 @@ db_ingredients = None
 db_reviews = None
 
 
-def connect():
+def connect(password):
     global db
     global db_recipes
     global db_ingredients
     global db_reviews
-    url = "postgresql://{}:{}@{}/{}".format(DB_USER, DB_PASSWORD, DB_URL, DB_NAME)
+    url = "postgresql://{}:{}@{}/{}".format(DB_USER, password, DB_URL, DB_NAME)
+    print("Connecting to database...")
     db = dataset.connect(url)
+    print("Connected! (not fully)")
     db_recipes = db["recipes"]
     db_ingredients = db["ingredients"]
     db_reviews = db["reviews"]

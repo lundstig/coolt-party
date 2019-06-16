@@ -73,8 +73,12 @@ def create_recipe():
     return redirect("/recipes/{}".format(recipe_id))
 
 DEBUG_MODE = os.environ.get('PROD') is None
+PASSWORD = os.environ.get('PASSWORD')
 print(f"DEBUG_MODE = {DEBUG_MODE}")
+if not PASSWORD:
+    print("No password provided in envvar PASSWORD!")
+    exit(1)
 
 debug(DEBUG_MODE)
-data.connect()
+data.connect(password=PASSWORD)
 run(host="0.0.0.0", port=8080, reloader=DEBUG_MODE)
