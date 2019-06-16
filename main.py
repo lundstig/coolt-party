@@ -1,4 +1,5 @@
 from bottle import *
+import os
 
 import data
 
@@ -71,7 +72,9 @@ def create_recipe():
     recipe_id = data.add_recipe(name, description, ingredients)
     return redirect("/recipes/{}".format(recipe_id))
 
+DEBUG_MODE = os.environ.get('PROD') is None
+print(f"DEBUG_MODE = {DEBUG_MODE}")
 
-debug(True)
+debug(DEBUG_MODE)
 data.connect()
-run(host="localhost", port=8080, reloader=True)
+run(host="0.0.0.0", port=8080, reloader=DEBUG_MODE)
