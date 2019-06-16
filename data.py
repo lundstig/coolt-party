@@ -61,6 +61,6 @@ def add_recipe(name, description, ingredients, reviews=None):
         traceback.print_exc()
 
 
-def add_review(recipe_id, review, author):
-    review_id = db_reviews.insert(dict(recipe=recipe_id, review=review, author=author))
+def add_review(recipe_id, review, author, rating):
+    review_id = db_reviews.insert(dict(recipe=recipe_id, review=review, author=author, rating=rating))
     return review_id

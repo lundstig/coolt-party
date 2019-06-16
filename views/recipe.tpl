@@ -17,15 +17,31 @@
     <div id="reviews">
       % for review in reviews:
         <blockquote>
+          % if "rating" in review and review["rating"]:
+            <p>
+              % for i in range(review["rating"]):
+                ★
+              % end
+              % for i in range(5 - review["rating"]):
+                ☆
+              % end
+            </p>
+          % end
           <p><q>{{review['review']}}</q></p>
-          <footer>{{get(review["author"], 'Okänd')}}</footer>
+          <footer>{{review["author"] or "Okänd"}}</footer>
           </blockquote>
       % end
       <br><br>
       <form method="post">
-        <input>
+        <select name="rating">
+          <option>1/5</option>
+          <option>2/5</option>
+          <option>3/5</option>
+          <option>4/5</option>
+          <option>5/5</option>
+        </select><br>
         <textarea name="review" placeholder="Skriv en recension"></textarea><br>
-        <input type="text" name="author" placeholder="Namn"></textarea>
+        <input type="text" name="author" placeholder="Namn">
         <br>
         <input type="submit" value="Skicka">
       </form>

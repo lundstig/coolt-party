@@ -39,9 +39,13 @@ def get_recipe(recipe_id):
 
 @post("/recipes/<recipe_id:int>")
 def review_recipe(recipe_id):
-    errors = validate_form(request.forms, ["review", "author"])
-    if not errors and data.get_recipe(recipe_id):
-        data.add_review(recipe_id, request.forms.review, request.forms.author)
+    errors = validate_form(request.forms, ["review", "author", "rating"])
+    valid_ratings = ["1/5", "2/5", "3/5", "4/5", "5/5"]
+    rating = request.forms.rating
+    print(rating)
+    if not errors and data.get_recipe(recipe_id) and rating in valid_ratings:
+        numeric_rating = int(rating[0])
+        data.add_review(recipe_id, request.forms.review, request.forms.author, numeric_rating)
     redirect("/recipes/{}".format(recipe_id))
 
 
